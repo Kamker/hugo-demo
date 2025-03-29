@@ -1,0 +1,12 @@
+{{ $title := .Get 0 }} {{ $content := .Get 1 }} {{ $pages := where
+.Site.RegularPages "Type" "posts" }} {{ $targetPage := "" }} {{ range $pages }}
+{{ if eq .Title $title }} {{ $targetPage = . }} {{ end }} {{ end }} {{ if
+$targetPage }}
+<a href="{{ $targetPage.RelPermalink }}"
+  >{{ $content | default $targetPage.Title }}</a
+>
+{{ else }}
+<span class="wikilink-broken" title="未找到文章：{{ $title }}"
+  >{{ $content | default $title }}</span
+>
+{{ end }}
